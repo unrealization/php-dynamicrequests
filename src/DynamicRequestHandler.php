@@ -73,7 +73,7 @@ class DynamicRequestHandler
 
 		$this->dynamicFunctions[$alias] = $function;
 	}
-	
+
 	public function process(): bool
 	{
 		if (empty($_POST['dynamicCall']))
