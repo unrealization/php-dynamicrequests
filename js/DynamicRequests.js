@@ -113,11 +113,20 @@ function DynamicResponseHandler(jsonData)
 			throw 'content is undefined';
 		}
 
-		var element = this.findElement(command.elementId);
+		var element;
 
-		if (element == null)
+		if (command.elementId == null)
 		{
-			throw 'elementId is invalid';
+			element = document.body;
+		}
+		else
+		{
+			element = this.findElement(command.elementId);
+
+			if (element == null)
+			{
+				throw 'elementId is invalid';
+			}
 		}
 
 		element.innerHTML += command.content;
@@ -135,11 +144,20 @@ function DynamicResponseHandler(jsonData)
 			throw 'content is undefined';
 		}
 
-		var element = this.findElement(command.elementId);
+		var element;
 
-		if (element == null)
+		if (command.elementId == null)
 		{
-			throw 'elementId is invalid';
+			element = document.body;
+		}
+		else
+		{
+			element = this.findElement(command.elementId);
+
+			if (element == null)
+			{
+				throw 'elementId is invalid';
+			}
 		}
 
 		var textNode = document.createTextNode(command.content);
@@ -163,11 +181,20 @@ function DynamicResponseHandler(jsonData)
 			throw 'elementId is undefined';
 		}
 
-		var element = this.findElement(command.elementId);
+		var element;
 
-		if (element == null)
+		if (command.elementId == null)
 		{
-			throw 'elementId is invalid';
+			element = document.body;
+		}
+		else
+		{
+			element = this.findElement(command.elementId);
+
+			if (element == null)
+			{
+				throw 'elementId is invalid';
+			}
 		}
 
 		element.click();
@@ -366,14 +393,33 @@ function DynamicResponseHandler(jsonData)
 			throw 'content is undefined';
 		}
 
-		var element = this.findElement(command.elementId);
+		var element;
 
-		if (element == null)
+		if (command.elementId == null)
 		{
-			throw 'elementId is invalid';
+			element = document.body;
+		}
+		else
+		{
+			element = this.findElement(command.elementId);
+
+			if (element == null)
+			{
+				throw 'elementId is invalid';
+			}
 		}
 
 		element.innerHTML = command.content + element.innerHTML;
+	};
+
+	this.openUrl = function(command)
+	{
+		if (typeof command.url == 'undefined')
+		{
+			throw 'url is undefined';
+		}
+
+		window.location.href = command.url;
 	};
 
 	this.prompt = function(command)
@@ -410,21 +456,14 @@ function DynamicResponseHandler(jsonData)
 
 	this.replace = function(command)
 	{
-		if (typeof command.replaceId == 'undefined')
-		{
-			throw 'replaceId is undefined';
-		}
-
 		if (typeof command.elementId == 'undefined')
 		{
 			throw 'elementId is undefined';
 		}
 
-		var replaceElement = this.findElement(command.replaceId);
-
-		if (replaceElement == null)
+		if (typeof command.replacementId == 'undefined')
 		{
-			throw 'replaceId is invalid';
+			throw 'replacementId is undefined';
 		}
 
 		var element = this.findElement(command.elementId);
@@ -434,7 +473,14 @@ function DynamicResponseHandler(jsonData)
 			throw 'elementId is invalid';
 		}
 
-		replaceElement.parentNode.replaceChild(element, replaceElement);
+		var replacementElement = this.findElement(command.replacementId);
+
+		if (replacementElement == null)
+		{
+			throw 'replacementId is invalid';
+		}
+
+		element.parentNode.replaceChild(replacementElement, element);
 	};
 
 	this.runFunction = function(command)
@@ -469,11 +515,20 @@ function DynamicResponseHandler(jsonData)
 			throw 'value is undefined';
 		}
 
-		var element = this.findElement(command.elementId);
+		var element;
 
-		if (element == null)
+		if (command.elementId == null)
 		{
-			throw 'elementId is invalid';
+			element = document.body;
+		}
+		else
+		{
+			element = this.findElement(command.elementId);
+
+			if (element == null)
+			{
+				throw 'elementId is invalid';
+			}
 		}
 
 		var indexList = command.index.split('.');
@@ -513,11 +568,20 @@ function DynamicResponseHandler(jsonData)
 			throw 'content is undefined';
 		}
 
-		var element = this.findElement(command.elementId);
+		var element;
 
-		if (element == null)
+		if (command.elementId == null)
 		{
-			throw 'elementId is invalid';
+			element = document.body;
+		}
+		else
+		{
+			element = this.findElement(command.elementId);
+
+			if (element == null)
+			{
+				throw 'elementId is invalid';
+			}
 		}
 
 		element.innerHTML = command.content;
@@ -582,6 +646,9 @@ function DynamicResponseHandler(jsonData)
 				break;
 			case 'insertHtml':
 				this.insertHtml(command);
+				break;
+			case 'openUrl':
+				this.openUrl(command);
 				break;
 			case 'prompt':
 				this.prompt(command);

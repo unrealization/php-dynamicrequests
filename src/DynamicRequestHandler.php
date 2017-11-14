@@ -12,13 +12,23 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 0.9.0
+ * @version 1.0.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
 {
+	/**
+	 * The list of functions registered to handle dynamic calls
+	 * @var array
+	 */
 	private $dynamicFunctions = array();
 
+	/**
+	 * Get an alias for a function name
+	 * @param string $function
+	 * @param bool $classless
+	 * @return string
+	 */
 	private function getFunctionAlias(string $function, bool $classless): string
 	{
 		$matches = array();
@@ -36,6 +46,11 @@ class DynamicRequestHandler
 		return $function;
 	}
 
+	/**
+	 * Check if a function exists
+	 * @param string $function
+	 * @return bool
+	 */
 	private function findFunction(string $function): bool
 	{
 		$className = '';
@@ -57,6 +72,12 @@ class DynamicRequestHandler
 		}
 	}
 
+	/**
+	 * Register a function to handle dynamic calls
+	 * @param string $function
+	 * @param bool $classlessAlias
+	 * @throws \Exception
+	 */
 	public function addFunction(string $function, bool $classlessAlias = true)
 	{
 		if (!$this->findFunction($function))
@@ -74,6 +95,11 @@ class DynamicRequestHandler
 		$this->dynamicFunctions[$alias] = $function;
 	}
 
+	/**
+	 * Process a dynamic request
+	 * @throws \Exception
+	 * @return bool
+	 */
 	public function process(): bool
 	{
 		if (empty($_POST['dynamicCall']))
@@ -132,6 +158,13 @@ class DynamicRequestHandler
 		return true;
 	}
 
+	/**
+	 * Get the JavaScript code needed to execute dynamic calls on the client side
+	 * @param string $url
+	 * @param string $metaTokenTagName
+	 * @param string $metaTokenSendName
+	 * @return string
+	 */
 	public function getJavaScript(string $url, string $metaTokenTagName = null, string $metaTokenSendName = null): string
 	{
 		$output = '';
