@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.0.0
+ * @version 1.1.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -97,14 +97,15 @@ class DynamicRequestHandler
 
 	/**
 	 * Process a dynamic request
+	 * @param bool $output
 	 * @throws \Exception
-	 * @return bool
+	 * @return string
 	 */
-	public function process(): bool
+	public function process(bool $output = true): string
 	{
 		if (empty($_POST['dynamicCall']))
 		{
-			return false;
+			return '';
 		}
 
 		$dynamicCall = json_decode($_POST['dynamicCall']);
@@ -154,8 +155,14 @@ class DynamicRequestHandler
 			throw new \Exception('Dynamic call '.$functionName.' did not return a DynamicResponse object.');
 		}
 
-		echo $response->output();
-		return true;
+		$jsonResponse = $response->toJson();
+
+		if ($output == true)
+		{
+			echo $jsonResponse;
+		}
+
+		return $jsonResponse;
 	}
 
 	/**
