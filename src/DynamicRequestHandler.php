@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.1.0
+ * @version 1.2.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -26,20 +26,14 @@ class DynamicRequestHandler
 	/**
 	 * Get an alias for a function name
 	 * @param string $function
-	 * @param bool $classless
 	 * @return string
 	 */
-	private function getFunctionAlias(string $function, bool $classless): string
+	private function getFunctionAlias(string $function): string
 	{
 		$matches = array();
 
 		if (preg_match('@^(.+)(?|->|::)(.+)$@U', $function, $matches))
 		{
-			if ($classless == true)
-			{
-				return $matches[2];
-			}
-
 			return $matches[1].'_'.$matches[2];
 		}
 
@@ -75,17 +69,16 @@ class DynamicRequestHandler
 	/**
 	 * Register a function to handle dynamic calls
 	 * @param string $function
-	 * @param bool $classlessAlias
 	 * @throws \Exception
 	 */
-	public function addFunction(string $function, bool $classlessAlias = true)
+	public function addFunction(string $function)
 	{
 		if (!$this->findFunction($function))
 		{
 			throw new \Exception('Dynamic call '.$function.' does not exist.');
 		}
 
-		$alias = $this->getFunctionAlias($function, $classlessAlias);
+		$alias = $this->getFunctionAlias($function);
 
 		if (isset($this->dynamicFunctions[$alias]))
 		{
