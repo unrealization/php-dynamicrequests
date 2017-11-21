@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.2.1
+ * @version 1.2.2
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -30,14 +30,8 @@ class DynamicRequestHandler
 	 */
 	private function getFunctionAlias(string $function): string
 	{
-		$matches = array();
-
-		if (preg_match('@^(.+)(?|->|::)(.+)$@U', $function, $matches))
-		{
-			return $matches[1].'_'.$matches[2];
-		}
-
-		return $function;
+		$alias = preg_replace('@^(?|(?|.+)(?|->|::))?([^\(]+)(?|\(.*\))?$@', '\\1', $function);
+		return $alias;
 	}
 
 	/**
