@@ -675,7 +675,7 @@ function DynamicResponseHandler(jsonData)
 	}
 }
 
-function DynamicRequest(url, callFunction, params, metaTokenTagName, metaTokenSendName)
+function DynamicRequest(url, callFunction, params, async, metaTokenTagName, metaTokenSendName)
 {
 	this.readyStateListener = function()
 	{
@@ -725,7 +725,16 @@ function DynamicRequest(url, callFunction, params, metaTokenTagName, metaTokenSe
 
 	var request = new XMLHttpRequest();
 	request.onreadystatechange = this.readyStateListener;
-	request.open('POST', url, true);
+
+	if (async == false)
+	{
+		request.open('POST', url, false);
+	}
+	else
+	{
+		request.open('POST', url, true);
+	}
+
 	request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 	if (typeof metaTokenTagName == 'undefined')
