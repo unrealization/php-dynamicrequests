@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.2.3
+ * @version 1.3.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -54,106 +54,122 @@ class DynamicResponse
 	 * Append an element to another element
 	 * @param string $parentId
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function addElement($parentId, string $elementId)
+	public function addElement($parentId, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'addElement',
-				'parentId'	=> $parentId,
-				'elementId'	=> $elementId
+			'command'	=> 'addElement',
+			'parentId'	=> $parentId,
+			'elementId'	=> $elementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Append raw HTML to an element
 	 * @param string $elementId
 	 * @param string $content
+	 * @return DynamicResponse
 	 */
-	public function addHtml($elementId, string $content)
+	public function addHtml($elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'addHtml',
-				'elementId'	=> $elementId,
-				'content'	=> $content
+			'command'	=> 'addHtml',
+			'elementId'	=> $elementId,
+			'content'	=> $content
 		);
+		return $this;
 	}
 
 	/**
 	 * Append plain text to an element
 	 * @param string $elementId
 	 * @param string $content
+	 * @return DynamicResponse
 	 */
-	public function addText($elementId, string $content)
+	public function addText($elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'addText',
-				'elementId'	=> $elementId,
-				'content'	=> $content
+			'command'	=> 'addText',
+			'elementId'	=> $elementId,
+			'content'	=> $content
 		);
+		return $this;
 	}
 
 	/**
 	 * Display an alert message
 	 * @param string $message
+	 * @return DynamicResponse
 	 */
-	public function alert(string $message)
+	public function alert(string $message): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'alert',
-				'message'	=> $message
+			'command'	=> 'alert',
+			'message'	=> $message
 		);
+		return $this;
 	}
 
 	/**
 	 * Simulate a click onto an element
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function click($elementId)
+	public function click($elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'click',
-				'elementId'	=> $elementId
+			'command'	=> 'click',
+			'elementId'	=> $elementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Display a confirmation window
 	 * @param string $message
 	 * @param string $handlerFunction
+	 * @return DynamicResponse
 	 */
-	public function confirm(string $message, string $handlerFunction)
+	public function confirm(string $message, string $handlerFunction): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'			=> 'confirm',
-				'message'			=> $message,
-				'handlerFunction'	=> $handlerFunction
+			'command'			=> 'confirm',
+			'message'			=> $message,
+			'handlerFunction'	=> $handlerFunction
 		);
+		return $this;
 	}
 
 	/**
 	 * Create a new element in memory
 	 * @param string $elementType
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function createElement(string $elementType, string $elementId)
+	public function createElement(string $elementType, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'		=> 'createElement',
-				'elementType'	=> $elementType,
-				'elementId'		=> $elementId
+			'command'		=> 'createElement',
+			'elementType'	=> $elementType,
+			'elementId'		=> $elementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Delete an element
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function deleteElement(string $elementId)
+	public function deleteElement(string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'deleteElement',
-				'elementId'	=> $elementId
+			'command'	=> 'deleteElement',
+			'elementId'	=> $elementId
 		);
+		return $this;
 	}
 
 	/**
@@ -162,84 +178,96 @@ class DynamicResponse
 	 * @param string $content
 	 * @param string $mimeType
 	 * @param string $encoding
+	 * @return DynamicResponse
 	 */
-	public function downloadFile(string $fileName, string $content, string $mimeType, string $encoding = 'UTF-8')
+	public function downloadFile(string $fileName, string $content, string $mimeType, string $encoding = 'UTF-8'): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'downloadFile',
-				'fileName'	=> $fileName,
-				'content'	=> $content,
-				'mimeType'	=> $mimeType,
-				'encoding'	=> $encoding
+			'command'	=> 'downloadFile',
+			'fileName'	=> $fileName,
+			'content'	=> $content,
+			'mimeType'	=> $mimeType,
+			'encoding'	=> $encoding
 		);
+		return $this;
 	}
 
 	/**
 	 * Insert an element into another element
 	 * @param string $parentId
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function insertElement($parentId, string $elementId)
+	public function insertElement($parentId, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'insertElement',
-				'parentId'	=> $parentId,
-				'elementId'	=> $elementId
+			'command'	=> 'insertElement',
+			'parentId'	=> $parentId,
+			'elementId'	=> $elementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Insert an element after another element
 	 * @param string $insertAfterId
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function insertElementAfter(string $insertAfterId, string $elementId)
+	public function insertElementAfter(string $insertAfterId, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'		=> 'insertElementAfter',
-				'insertAfterId'	=> $insertAfterId,
-				'elementId'		=> $elementId
+			'command'		=> 'insertElementAfter',
+			'insertAfterId'	=> $insertAfterId,
+			'elementId'		=> $elementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Insert an element before another element
 	 * @param string $insertBeforeId
 	 * @param string $elementId
+	 * @return DynamicResponse
 	 */
-	public function insertElementBefore(string $insertBeforeId, string $elementId)
+	public function insertElementBefore(string $insertBeforeId, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'			=> 'insertElementBefore',
-				'insertBeforeId'	=> $insertBeforeId,
-				'elementId'			=> $elementId
+			'command'			=> 'insertElementBefore',
+			'insertBeforeId'	=> $insertBeforeId,
+			'elementId'			=> $elementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Insert raw HTML into an element
 	 * @param string $elementId
 	 * @param string $content
+	 * @return DynamicResponse
 	 */
-	public function insertHtml($elementId, string $content)
+	public function insertHtml($elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'insertHtml',
-				'elementId'	=> $elementId,
-				'content'	=> $content
+			'command'	=> 'insertHtml',
+			'elementId'	=> $elementId,
+			'content'	=> $content
 		);
+		return $this;
 	}
 
 	/**
 	 * Open a URL
 	 * @param string $url
+	 * @return DynamicResponse
 	 */
-	public function openUrl(string $url)
+	public function openUrl(string $url): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'openUrl',
-				'url'		=> $url
+			'command'	=> 'openUrl',
+			'url'		=> $url
 		);
+		return $this;
 	}
 
 	/**
@@ -247,41 +275,47 @@ class DynamicResponse
 	 * @param string $message
 	 * @param string $handlerFunction
 	 * @param string $defaultValue
+	 * @return DynamicResponse
 	 */
-	public function prompt(string $message, string $handlerFunction, string $defaultValue = '')
+	public function prompt(string $message, string $handlerFunction, string $defaultValue = ''): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'			=> 'prompt',
-				'message'			=> $message,
-				'handlerFunction'	=> $handlerFunction,
-				'defaultValue'		=> $defaultValue
+			'command'			=> 'prompt',
+			'message'			=> $message,
+			'handlerFunction'	=> $handlerFunction,
+			'defaultValue'		=> $defaultValue
 		);
+		return $this;
 	}
 
 	/**
 	 * Replace an element
 	 * @param string $elementId
 	 * @param string $replacementId
+	 * @return DynamicResponse
 	 */
-	public function replace(string $elementId, string $replacementId)
+	public function replace(string $elementId, string $replacementId): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'		=> 'replace',
-				'elementId'		=> $elementId,
-				'replacementId'	=> $replacementId
+			'command'		=> 'replace',
+			'elementId'		=> $elementId,
+			'replacementId'	=> $replacementId
 		);
+		return $this;
 	}
 
 	/**
 	 * Call a function
 	 * @param string $function
+	 * @return DynamicResponse
 	 */
-	public function runFunction(string $function)
+	public function runFunction(string $function): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'runFunction',
-				'function'	=> $function
+			'command'	=> 'runFunction',
+			'function'	=> $function
 		);
+		return $this;
 	}
 
 	/**
@@ -289,43 +323,49 @@ class DynamicResponse
 	 * @param string $elementId
 	 * @param string $index
 	 * @param string $value
+	 * @return DynamicResponse
 	 */
-	public function set($elementId, string $index, string $value)
+	public function set($elementId, string $index, string $value): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'set',
-				'elementId'	=> $elementId,
-				'index'		=> $index,
-				'value'		=> $value
+			'command'	=> 'set',
+			'elementId'	=> $elementId,
+			'index'		=> $index,
+			'value'		=> $value
 		);
+		return $this;
 	}
 
 	/**
 	 * Set an element's raw HTML content
 	 * @param string $elementId
 	 * @param string $content
+	 * @return DynamicResponse
 	 */
-	public function setHtml($elementId, string $content)
+	public function setHtml($elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'setHtml',
-				'elementId'	=> $elementId,
-				'content'	=> $content
+			'command'	=> 'setHtml',
+			'elementId'	=> $elementId,
+			'content'	=> $content
 		);
+		return $this;
 	}
 
 	/**
 	 * Set a variable
 	 * @param string $variable
 	 * @param string $content
+	 * @return DynamicResponse
 	 */
-	public function setVariable(string $variable, string $content)
+	public function setVariable(string $variable, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
-				'command'	=> 'setVariable',
-				'variable'	=> $variable,
-				'content'	=> $content
+			'command'	=> 'setVariable',
+			'variable'	=> $variable,
+			'content'	=> $content
 		);
+		return $this;
 	}
 }
 ?>

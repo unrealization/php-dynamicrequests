@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.2.3
+ * @version 1.3.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -64,8 +64,9 @@ class DynamicRequestHandler
 	 * Register a function to handle dynamic calls
 	 * @param string $function
 	 * @throws \Exception
+	 * @return DynamicRequestHandler
 	 */
-	public function addFunction(string $function)
+	public function addFunction(string $function): DynamicRequestHandler
 	{
 		if (!$this->findFunction($function))
 		{
@@ -80,6 +81,7 @@ class DynamicRequestHandler
 		}
 
 		$this->dynamicFunctions[$alias] = $function;
+		return $this;
 	}
 
 	/**
