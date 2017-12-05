@@ -454,6 +454,11 @@ function DynamicResponseHandler(jsonData)
 		window[command.handlerFunction](prompt(command.message, defaultValue));
 	};
 
+	this.reloadPage = function(command)
+	{
+		window.location.href = window.location.href;
+	}
+
 	this.replace = function(command)
 	{
 		if (typeof command.elementId == 'undefined')
@@ -652,6 +657,9 @@ function DynamicResponseHandler(jsonData)
 				break;
 			case 'prompt':
 				this.prompt(command);
+				break;
+			case 'reloadPage':
+				this.reloadPage(command);
 				break;
 			case 'replace':
 				this.replace(command);

@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.3.0
+ * @version 1.4.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -284,6 +284,18 @@ class DynamicResponse
 			'message'			=> $message,
 			'handlerFunction'	=> $handlerFunction,
 			'defaultValue'		=> $defaultValue
+		);
+		return $this;
+	}
+
+	/**
+	 * Reload the current page
+	 * @return DynamicResponse
+	 */
+	public function reloadPage(): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'	=> 'reloadPage'
 		);
 		return $this;
 	}
