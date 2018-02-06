@@ -457,7 +457,7 @@ function DynamicResponseHandler(jsonData)
 	this.reloadPage = function(command)
 	{
 		window.location.href = window.location.href;
-	}
+	};
 
 	this.replace = function(command)
 	{
