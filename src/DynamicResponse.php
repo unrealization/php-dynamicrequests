@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.4.1
+ * @version 1.5.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -289,13 +289,25 @@ class DynamicResponse
 	}
 
 	/**
-	 * Reload the current page
+	 * Reload the current page. May re-send POST variables.
 	 * @return DynamicResponse
 	 */
 	public function reloadPage(): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'reloadPage'
+		);
+		return $this;
+	}
+
+	/**
+	 * Reload the current URL. Will not re-send POST variables.
+	 * @return DynamicResponse
+	 */
+	public function reloadUrl(): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'	=> 'reloadUrl'
 		);
 		return $this;
 	}

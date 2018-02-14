@@ -456,8 +456,13 @@ function DynamicResponseHandler(jsonData)
 
 	this.reloadPage = function(command)
 	{
-		window.location.href = window.location.href;
+		window.location.reload(true);
 	};
+
+	this.reloadUrl = function(command)
+	{
+		window.location.href = window.location.href;
+	}
 
 	this.replace = function(command)
 	{
@@ -537,6 +542,7 @@ function DynamicResponseHandler(jsonData)
 		}
 
 		var indexList = command.index.split('.');
+		var index;
 
 		while (index = indexList.shift())
 		{
@@ -661,6 +667,9 @@ function DynamicResponseHandler(jsonData)
 			case 'reloadPage':
 				this.reloadPage(command);
 				break;
+			case 'reloadUrl':
+				this.reloadUrl(command);
+				break;
 			case 'replace':
 				this.replace(command);
 				break;
@@ -692,7 +701,7 @@ function DynamicRequest(url, callFunction, params, async, metaTokenTagName, meta
 			try
 			{
 				var data = JSON.parse(this.responseText);
-				var handler = new DynamicResponseHandler(data);
+				new DynamicResponseHandler(data);
 			}
 			catch (exception)
 			{
