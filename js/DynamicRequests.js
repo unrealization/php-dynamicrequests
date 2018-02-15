@@ -63,6 +63,13 @@ function DynamicResponseHandler(jsonData)
 		return null;
 	};
 
+	this.htmlToElement = function(content)
+	{
+		var element = document.createElement('template');
+		element.innerHTML = content;
+		return element.content.firstChild;
+	};
+
 	this.addElement = function(command)
 	{
 		if (typeof command.parentId == 'undefined')
@@ -129,7 +136,7 @@ function DynamicResponseHandler(jsonData)
 			}
 		}
 
-		element.innerHTML += command.content;
+		element.appendChild(this.htmlToElement(command.content));
 	};
 
 	this.addText = function(command)
@@ -409,7 +416,51 @@ function DynamicResponseHandler(jsonData)
 			}
 		}
 
-		element.innerHTML = command.content + element.innerHTML;
+		element.insertBefore(this.htmlToElement(command.content), element.firstChild);
+	};
+
+	this.insertHtmlAfter = function(command)
+	{
+		if (typeof command.insertAfterId == 'undefined')
+		{
+			throw 'insertAfterId is undefined';
+		}
+
+		if (typeof command.content == 'undefined')
+		{
+			throw 'content is undefined';
+		}
+
+		var insertAfterElement = this.findElement(command.insertAfterId);
+
+		if (insertAfterElement == null)
+		{
+			throw 'insertAfterId is invalid';
+		}
+
+		insertAfterElement.parentNode.insertBefore(this.htmlToElement(command.content), insertAfterElement.nextSibling);
+	};
+
+	this.insertHtmlBefore = function(command)
+	{
+		if (typeof command.insertBeforeId == 'undefined')
+		{
+			throw 'insertBeforeId is undefined';
+		}
+
+		if (typeof command.content == 'undefined')
+		{
+			throw 'content is undefined';
+		}
+
+		var insertBeforeElement = this.findElement(command.insertBeforeId);
+
+		if (insertBeforeElement == null)
+		{
+			throw 'insertBeforeId is invalid';
+		}
+
+		insertBeforeElement.parentNode.insertBefore(this.htmlToElement(command.content), insertBeforeElement);
 	};
 
 	this.openUrl = function(command)
@@ -491,6 +542,28 @@ function DynamicResponseHandler(jsonData)
 		}
 
 		element.parentNode.replaceChild(replacementElement, element);
+	};
+
+	this.replaceWithHtml = function(command)
+	{
+		if (typeof command.elementId == 'undefined')
+		{
+			throw 'elementId is undefined';
+		}
+
+		if (typeof command.content == 'undefined')
+		{
+			throw 'content is undefined';
+		}
+
+		var element = this.findElement(command.elementId);
+
+		if (element == null)
+		{
+			throw 'elementId is invalid';
+		}
+
+		element.parentNode.replaceChild(this.htmlToElement(command.content), element);
 	};
 
 	this.runFunction = function(command)
@@ -658,6 +731,12 @@ function DynamicResponseHandler(jsonData)
 			case 'insertHtml':
 				this.insertHtml(command);
 				break;
+			case 'insertHtmlAfter':
+				this.insertHtmlAfter(command);
+				break;
+			case 'insertHtmlBefore':
+				this.insertHtmlBefore(command);
+				break;
 			case 'openUrl':
 				this.openUrl(command);
 				break;
@@ -672,6 +751,9 @@ function DynamicResponseHandler(jsonData)
 				break;
 			case 'replace':
 				this.replace(command);
+				break;
+			case 'replaceWithHtml':
+				this.replaceWithHtml(command);
 				break;
 			case 'runFunction':
 				this.runFunction(command);

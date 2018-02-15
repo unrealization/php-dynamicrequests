@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.6.1
+ * @version 1.7.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -257,6 +257,38 @@ class DynamicResponse
 	}
 
 	/**
+	 * Insert raw HTML after an element
+	 * @param string $insertAfterId
+	 * @param string $content
+	 * @return DynamicResponse
+	 */
+	public function insertHtmlAfter(string $insertAfterId, string $content): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'		=> 'insertHtmlAfter',
+			'insertAfterId'	=> $insertAfterId,
+			'content'		=> $content
+		);
+		return $this;
+	}
+
+	/**
+	 * Insert raw HTML before an element
+	 * @param string $insertBeforeId
+	 * @param string $content
+	 * @return DynamicResponse
+	 */
+	public function insertHtmlBefore(string $insertBeforeId, string $content): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'			=> 'insertHtmlBefore',
+			'insertBeforeId'	=> $insertBeforeId,
+			'content'			=> $content
+		);
+		return $this;
+	}
+
+	/**
 	 * Open a URL
 	 * @param string $url
 	 * @return DynamicResponse
@@ -324,6 +356,22 @@ class DynamicResponse
 			'command'		=> 'replace',
 			'elementId'		=> $elementId,
 			'replacementId'	=> $replacementId
+		);
+		return $this;
+	}
+
+	/**
+	 * Replace an element with raw HTML
+	 * @param string $elementId
+	 * @param string $content
+	 * @return DynamicResponse
+	 */
+	public function replaceWithHtml(string $elementId, string $content): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'	=> 'replaceWithHtml',
+			'elementId'	=> $elementId,
+			'content'	=> $content
 		);
 		return $this;
 	}
