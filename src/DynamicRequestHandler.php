@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.6.0
+ * @version 1.6.1
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -157,6 +157,7 @@ class DynamicRequestHandler
 	/**
 	 * Get the JavaScript code needed to execute dynamic calls on the client side
 	 * @param string $url
+	 * @param string $prefix
 	 * @param string $metaTokenTagName
 	 * @param string $metaTokenSendName
 	 * @return string
