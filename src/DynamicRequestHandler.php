@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.7.0
+ * @version 1.7.1
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -168,7 +168,7 @@ class DynamicRequestHandler
 
 		foreach ($this->dynamicFunctions as $alias => $function)
 		{
-			$output .= 'function '.$prefix.$alias.'(params, async) { var request = new DynamicRequest(\''.$url.'\', \''.$alias.'\', params, async';
+			$output .= 'function '.$prefix.$alias.'(params, async) { new DynamicRequest(\''.$url.'\', \''.$alias.'\', params, async';
 
 			if (!is_null($metaTokenTagName))
 			{
