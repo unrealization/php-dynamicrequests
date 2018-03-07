@@ -285,7 +285,7 @@ function DynamicResponseHandler(jsonData)
 		}
 
 		var element = document.createElement('a');
-		element.href = 'data:' + command.mimeType + ';charset='+ command.encoding +',' + command.content;
+		element.href = 'data:' + command.mimeType + ';charset='+ command.encoding +',' + escape(atob(command.content));
 		element.download = command.fileName;
 		element.style.display = 'none';
 		document.body.appendChild(element);

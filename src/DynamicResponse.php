@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.7.1
+ * @version 1.7.2
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -185,7 +185,7 @@ class DynamicResponse
 		$this->commands[] = array(
 			'command'	=> 'downloadFile',
 			'fileName'	=> $fileName,
-			'content'	=> $content,
+			'content'	=> base64_encode($content),
 			'mimeType'	=> $mimeType,
 			'encoding'	=> $encoding
 		);
