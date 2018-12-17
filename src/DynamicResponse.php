@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 1.7.3
+ * @version 2.0.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -56,7 +56,7 @@ class DynamicResponse
 	 * @param string $elementId
 	 * @return DynamicResponse
 	 */
-	public function addElement($parentId, string $elementId): DynamicResponse
+	public function addElement(?string $parentId, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'addElement',
@@ -72,7 +72,7 @@ class DynamicResponse
 	 * @param string $content
 	 * @return DynamicResponse
 	 */
-	public function addHtml($elementId, string $content): DynamicResponse
+	public function addHtml(?string $elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'addHtml',
@@ -88,7 +88,7 @@ class DynamicResponse
 	 * @param string $content
 	 * @return DynamicResponse
 	 */
-	public function addText($elementId, string $content): DynamicResponse
+	public function addText(?string $elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'addText',
@@ -117,7 +117,7 @@ class DynamicResponse
 	 * @param string $elementId
 	 * @return DynamicResponse
 	 */
-	public function click($elementId): DynamicResponse
+	public function click(?string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'click',
@@ -198,7 +198,7 @@ class DynamicResponse
 	 * @param string $elementId
 	 * @return DynamicResponse
 	 */
-	public function insertElement($parentId, string $elementId): DynamicResponse
+	public function insertElement(?string $parentId, string $elementId): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'insertElement',
@@ -246,7 +246,7 @@ class DynamicResponse
 	 * @param string $content
 	 * @return DynamicResponse
 	 */
-	public function insertHtml($elementId, string $content): DynamicResponse
+	public function insertHtml(?string $elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'insertHtml',
@@ -397,7 +397,7 @@ class DynamicResponse
 	 * @param string $value
 	 * @return DynamicResponse
 	 */
-	public function set($elementId, string $index, string $value): DynamicResponse
+	public function set(?string $elementId, string $index, string $value): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'set',
@@ -414,7 +414,7 @@ class DynamicResponse
 	 * @param string $content
 	 * @return DynamicResponse
 	 */
-	public function setHtml($elementId, string $content): DynamicResponse
+	public function setHtml(?string $elementId, string $content): DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'setHtml',
