@@ -12,7 +12,7 @@ namespace unrealization\PHPClassCollection;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 2.0.0
+ * @version 2.0.1
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse
@@ -44,8 +44,9 @@ class DynamicResponse
 
 	/**
 	 * Output the command list as JSON
+	 * @return void
 	 */
-	public function output()
+	public function output(): void
 	{
 		echo $this->toJson();
 	}
