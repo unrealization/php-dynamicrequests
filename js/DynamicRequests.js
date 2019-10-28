@@ -290,6 +290,7 @@ function DynamicResponseHandler(jsonData)
 		element.style.display = 'none';
 		document.body.appendChild(element);
 		element.click();
+		element.parentNode.removeChild(element);
 	};
 
 	this.insertElement = function(command)
