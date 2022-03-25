@@ -70,6 +70,28 @@ function DynamicResponseHandler(jsonData)
 		return element.content.firstChild;
 	};
 
+	this.addClass = function(command)
+	{
+		if (typeof command.elementId == 'undefined')
+		{
+			throw 'elementId is undefined';
+		}
+
+		if (typeof command.className == 'undefined')
+		{
+			throw 'className is undefined';
+		}
+
+		var element = this.findElement(command.elementId);
+
+		if (element == null)
+		{
+			throw 'elementId is invalid';
+		}
+
+		element.classList.add(command.className);
+	};
+
 	this.addElement = function(command)
 	{
 		if (typeof command.parentId == 'undefined')
@@ -514,6 +536,28 @@ function DynamicResponseHandler(jsonData)
 	this.reloadUrl = function(command)
 	{
 		window.location.href = window.location.href;
+	};
+
+	this.removeClass = function(command)
+	{
+		if (typeof command.elementId == 'undefined')
+		{
+			throw 'elementId is undefined';
+		}
+
+		if (typeof command.className == 'undefined')
+		{
+			throw 'className is undefined';
+		}
+
+		var element = this.findElement(command.elementId);
+
+		if (element == null)
+		{
+			throw 'elementId is invalid';
+		}
+
+		element.classList.remove(command.className);
 	};
 
 	this.replace = function(command)

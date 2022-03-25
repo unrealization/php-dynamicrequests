@@ -52,6 +52,22 @@ class DynamicResponse
 	}
 
 	/**
+	 * Add a CSS class to an element
+	 * @param string $elementId
+	 * @param string $className
+	 * @return DynamicResponse
+	 */
+	public function addClass(string $elementId, string $className): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'	=> 'addClass',
+			'elementId'	=> $elementId,
+			'className'	=> $className
+		);
+		return $this;
+	}
+
+	/**
 	 * Append an element to another element
 	 * @param string $parentId
 	 * @param string $elementId
@@ -341,6 +357,22 @@ class DynamicResponse
 	{
 		$this->commands[] = array(
 			'command'	=> 'reloadUrl'
+		);
+		return $this;
+	}
+
+	/**
+	 * Remove a CSS class from an element
+	 * @param string $elementId
+	 * @param string $className
+	 * @return DynamicResponse
+	 */
+	public function removeClass(string $elementId, string $className): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'	=> 'removeClass',
+			'elementId'	=> $elementId,
+			'className'	=> $className
 		);
 		return $this;
 	}
