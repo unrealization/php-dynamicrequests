@@ -737,6 +737,9 @@ function DynamicResponseHandler(jsonData)
 
 		switch (command.command)
 		{
+			case 'addClass':
+				this.addClass(command);
+				break;
 			case 'addElement':
 				this.addElement(command);
 				break;
@@ -793,6 +796,9 @@ function DynamicResponseHandler(jsonData)
 				break;
 			case 'reloadUrl':
 				this.reloadUrl(command);
+				break;
+			case 'removeClass':
+				this.removeClass(command);
 				break;
 			case 'replace':
 				this.replace(command);
