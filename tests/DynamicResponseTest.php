@@ -1,10 +1,10 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use unrealization\PHPClassCollection\DynamicResponse;
+use unrealization\DynamicResponse;
 
 /**
  * DynamicResponse test case.
- * @covers unrealization\PHPClassCollection\DynamicResponse
+ * @covers unrealization\DynamicResponse
  */
 class DynamicResponseTest extends TestCase
 {

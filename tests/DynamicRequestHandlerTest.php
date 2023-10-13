@@ -1,12 +1,12 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use unrealization\PHPClassCollection\DynamicRequestHandler;
-use unrealization\PHPClassCollection\DynamicResponse;
+use unrealization\DynamicRequestHandler;
+use unrealization\DynamicResponse;
 
 /**
  * DynamicRequestHandler test case.
- * @covers unrealization\PHPClassCollection\DynamicRequestHandler
- * @uses unrealization\PHPClassCollection\DynamicResponse
+ * @covers unrealization\DynamicRequestHandler
+ * @uses unrealization\DynamicResponse
  */
 class DynamicRequestHandlerTest extends TestCase
 {
