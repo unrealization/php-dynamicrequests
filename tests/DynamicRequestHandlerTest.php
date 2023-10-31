@@ -129,7 +129,7 @@ class DynamicRequestHandlerTest extends TestCase
 		$handler->addFunction('dummyFunction');
 		$js = $handler->getJavaScript('/test', '', 'tokenTag', 'tokenValue');
 		$this->assertIsString($js);
-		$this->assertRegExp('@^function dummyFunction.+$@', $js);
+		$this->assertMatchesRegularExpression('@^function dummyFunction.+$@', $js);
 	}
 }
 
