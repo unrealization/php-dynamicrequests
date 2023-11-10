@@ -306,7 +306,16 @@ function DynamicResponseHandler(jsonData)
 			throw 'encoding is undefined';
 		}
 
-		var fileBlob = new Blob([atob(command.content)], { type: command.mimeType });
+		var content = atob(command.content);
+		var contentArray = new Array(content.length);
+
+		for (var x = 0; x < content.length; x++)
+		{
+			contentArray[x] = content.charCodeAt(x);
+		}
+
+		var byteArray = new Uint8Array(contentArray);
+		var fileBlob = new Blob([byteArray], { type: command.mimeType });
 		var fileUrl = window.URL.createObjectURL(fileBlob);
 		var element = document.createElement('a');
 		element.href = fileUrl;
