@@ -31,6 +31,16 @@ class DynamicResponseTest extends TestCase
 		$response->output();
 	}
 
+	public function testAddClass()
+	{
+		$response = new DynamicResponse();
+		$response->addClass('elementId', 'myClass');
+		$this->assertInstanceOf(DynamicResponse::class, $response);
+		$output = $response->toJson();
+		$this->assertIsString($output);
+		$this->assertSame('[{"command":"addClass","elementId":"elementId","className":"myClass"}]', $output);
+	}
+
 	public function testAddElement()
 	{
 		$response = new DynamicResponse();
@@ -219,6 +229,16 @@ class DynamicResponseTest extends TestCase
 		$output = $response->toJson();
 		$this->assertIsString($output);
 		$this->assertSame('[{"command":"reloadUrl"}]', $output);
+	}
+
+	public function testRemoveClass()
+	{
+		$response = new DynamicResponse();
+		$response = $response->removeClass('elementId', 'myClass');
+		$this->assertInstanceOf(DynamicResponse::class, $response);
+		$output = $response->toJson();
+		$this->assertIsString($output);
+		$this->assertSame('[{"command":"removeClass","elementId":"elementId","className":"myClass"}]', $output);
 	}
 
 	public function testReplace()
