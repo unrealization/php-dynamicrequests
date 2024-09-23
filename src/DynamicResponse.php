@@ -12,7 +12,7 @@ namespace unrealization;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 5.0.1
+ * @version 5.1.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicResponse implements \Stringable
