@@ -300,4 +300,14 @@ class DynamicResponseTest extends TestCase
 		$this->assertIsString($output);
 		$this->assertSame('[{"command":"setVariable","variable":"variable","content":"content"}]', $output);
 	}
+
+	public function testWriteToClipboard()
+	{
+		$response = new DynamicResponse();
+		$response = $response->writeToClipboard('clipboard');
+		$this->assertInstanceOf(DynamicResponse::class, $response);
+		$output = $response->toJson();
+		$this->assertIsString($output);
+		$this->assertSame('[{"command":"writeToClipboard","text":"clipboard"}]', $output);
+	}
 }
