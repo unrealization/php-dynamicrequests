@@ -472,5 +472,13 @@ class DynamicResponse implements \Stringable
 		);
 		return $this;
 	}
+
+	public function writeToClipboard(string $text): DynamicResponse
+	{
+		$this->commands[] = array(
+			'command'	=> 'writeToClipboard',
+			'text'		=> $text
+		);
+		return $this;
+	}
 }
-?>

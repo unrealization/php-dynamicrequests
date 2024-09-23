@@ -743,6 +743,16 @@ function DynamicResponseHandler(jsonData)
 		window[command.variable] = command.content;
 	};
 
+	this.writeToClipboard = function(command)
+	{
+		if (typeof command.text == 'undefined')
+		{
+			throw 'text is undefined';
+		}
+
+		navigator.clipboard.writeText(command.text);
+	}
+
 	for (var commandIndex = 0; commandIndex < jsonData.length; commandIndex++)
 	{
 		var command = jsonData[commandIndex];
@@ -829,6 +839,9 @@ function DynamicResponseHandler(jsonData)
 				break;
 			case 'setVariable':
 				this.setVariable(command);
+				break;
+			case 'writeToClipboard':
+				this.writeToClipboard(command);
 				break;
 			default:
 				throw 'Unknown command: ' + command.command;
