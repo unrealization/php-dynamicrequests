@@ -27,7 +27,7 @@ class DynamicRequestHandlerTest extends TestCase
 	public function testAddFunctionMissing()
 	{
 		$handler = new DynamicRequestHandler();
-		$this->expectException(\Exception::class);
+		$this->expectException(\TypeError::class);
 		$handler->addFunction('testFunction');
 	}
 
