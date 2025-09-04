@@ -12,7 +12,7 @@ namespace unrealization;
  * @subpackage DynamicRequests
  * @link http://php-classes.sourceforge.net/ PHP Class Collection
  * @author Dennis Wronka <reptiler@users.sourceforge.net>
- * @version 5.1.1
+ * @version 5.99.0
  * @license http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html LGPL 2.1
  */
 class DynamicRequestHandler
@@ -25,54 +25,28 @@ class DynamicRequestHandler
 
 	/**
 	 * Get an alias for a function name
-	 * @param string $function
+	 * @param callable $function
 	 * @return string
 	 */
-	private function getFunctionAlias(string $function): string
+	private function getFunctionAlias(callable $function): string
 	{
-		$alias = preg_replace('@^(?|(?|.+)(?|->|::|\\\))?([^\(]+)(?|\(.*\))?$@', '\\1', $function);
+		if (is_array($function))
+		{
+			return $function[1];
+		}
+
+		$alias = preg_replace('@^(?|(?|.+)(?|::|\\\))?([^\(]+)$@', '\\1', $function);
 		return $alias;
 	}
 
 	/**
-	 * Check if a function exists
-	 * @param string $function
-	 * @return bool
-	 */
-	private function findFunction(string $function): bool
-	{
-		$className = '';
-		$matches = array();
-
-		if (preg_match('@^(.+)(?|->|::)(.+)$@U', $function, $matches))
-		{
-			$className = $matches[1];
-			$function = $matches[2];
-		}
-
-		if (empty($className))
-		{
-			return function_exists($function);
-		}
-		else
-		{
-			return is_callable(array($className, $function));
-		}
-	}
-
-	/**
 	 * Register a function to handle dynamic calls
-	 * @param string $function
+	 * @param callable $function
 	 * @throws \Exception
 	 * @return DynamicRequestHandler
 	 */
-	public function addFunction(string $function): DynamicRequestHandler
+	public function addFunction(callable $function): DynamicRequestHandler
 	{
-		if (!$this->findFunction($function))
-		{
-			throw new \Exception('Dynamic call '.$function.' does not exist.');
-		}
-
 		$alias = $this->getFunctionAlias($function);
 
 		if (isset($this->dynamicFunctions[$alias]))
@@ -132,7 +106,7 @@ class DynamicRequestHandler
 
 		$functionName = $this->dynamicFunctions[$dynamicCall->functionName];
 
-		if (!$this->findFunction($functionName))
+		if (!is_callable($functionName))
 		{
 			throw new \Exception('Dynamic call '.$functionName.' does not exist.');
 		}
